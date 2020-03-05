@@ -1,0 +1,89 @@
+﻿<Window x:Class="AndonServer.MainUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AndonServer"
+        xmlns:cmd="clr-namespace:AndonServer.Utils"
+        xmlns:m="clr-namespace:AndonServer"
+        xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Server" Height="306.272" Width="497.814" WindowState="Maximized" Closing="Window_Closing">
+    <Window.CommandBindings>
+        <CommandBinding Command="cmd:CMD.OPT" Executed="CommandBinding_Executed"></CommandBinding>
+    </Window.CommandBindings>
+    <Window.Resources>
+        <DataTemplate x:Key="duka">
+            <Grid ContextMenuOpening="MenuOpen" ContextMenuClosing="MenuClose"> 
+                <Grid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header = "Detail" Click="MenuClick"/>
+                        <MenuItem Name="a" Header = "Monitorig only this" IsCheckable = "True" Checked="MenuCheck" Unchecked="MenuCheck"/>
+                        <Separator />
+                        <MenuItem Header = "Increase Font Size" />
+                        <MenuItem Header = "_Decrease Font Size" />
+                    </ContextMenu>
+                </Grid.ContextMenu>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border BorderBrush="White" BorderThickness="1,1,1,1" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
+                    <Label Content="G12" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                </Border>
+                <Border BorderBrush="White" BorderThickness="1,0,0,1" Grid.Column="0" Grid.Row="1">
+                    <Label Content="PLAN" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                </Border>
+                <Border BorderBrush="White" BorderThickness="1,0,1,1" Grid.Column="1" Grid.Row="1">
+                    <Label Name="plan" Content="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" FontFamily="DSEG7 Modern" />
+                </Border>
+                <Border BorderBrush="White" BorderThickness="1,0,0,1" Grid.Column="0" Grid.Row="2">
+                    <Label Content="ACT" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" />
+                </Border>
+                <Border BorderBrush="White" BorderThickness="1,0,1,1" Grid.Column="1" Grid.Row="2">
+                    <Label Name="act" Content="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" FontFamily="DSEG7 Modern" />
+                </Border>
+                <Border BorderBrush="White" BorderThickness="1,0,1,1" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3">
+                    <Wpf:Gauge GaugeBackground="White" FromColor="#E93E53" ToColor="#00E676" Foreground="White" FontSize="9" Margin="10, 10, 10, 15" To="100" Value="50"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="165"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Black">
+            <Grid Margin="5" Name="gdata">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+            </Grid>
+        </ScrollViewer>
+        <TextBlock Text="MONITORING STATUS: " Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Name="status" Grid.Column="1" Grid.Row="1" Text="Fixed text" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+        <TextBlock Name="nomc" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden" Text="No machine available" Foreground="White" FontSize="25" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>
